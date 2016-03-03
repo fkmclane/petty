@@ -1,4 +1,4 @@
-#!/bin/busybox sh
+#!/bin/sh
 if [ -z "$XDG_CONFIG_HOME" ]; then
 	XDG_CONFIG_HOME="$HOME/.config"
 fi
