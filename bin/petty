@@ -9,6 +9,10 @@ if [ -f "$XDG_CONFIG_HOME/petty/pettyrc" ]; then
 	source "$XDG_CONFIG_HOME/petty/pettyrc"
 fi
 
+if [ $# -ne 0 ]; then
+	exec "$shell" "$@"
+fi
+
 if [ -z "$XDG_SESSION_DESKTOP" ]; then
 	eval session="\$session$XDG_VTNR"
 
@@ -36,4 +40,4 @@ else
 	session_exec="$shell"
 fi
 
-exec $session_exec
+exec "$session_exec"
