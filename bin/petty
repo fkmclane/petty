@@ -1,4 +1,7 @@
 #!/bin/sh
+source /etc/profile
+source "$HOME"/.profile
+
 if [ -z "$XDG_CONFIG_HOME" ]; then
 	XDG_CONFIG_HOME="$HOME/.config"
 fi
