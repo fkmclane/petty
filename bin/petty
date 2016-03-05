@@ -8,12 +8,12 @@ fi
 
 shell="/bin/sh"
 
-if [ -f "$XDG_CONFIG_HOME/petty/pettyrc" ]; then
-	source "$XDG_CONFIG_HOME/petty/pettyrc"
-fi
-
 if [ $# -ne 0 ]; then
 	exec "$shell" "$@"
+fi
+
+if [ -f "$XDG_CONFIG_HOME/petty/pettyrc" ]; then
+	source "$XDG_CONFIG_HOME/petty/pettyrc"
 fi
 
 if [ -z "$XDG_SESSION_DESKTOP" ]; then
