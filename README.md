@@ -8,7 +8,7 @@ Features
 --------
 
 * support for any shell (e.g. `zsh`) or script (e.g. `startxfce4`) that can be executed
-* provided xsession script that will set up X11 (with magic cookies!) and run a corresponding xsession script
+* provided xsession script that will set up X11 (with magic cookies!) and run a corresponding xsession script in the session
 
 
 Installing
@@ -39,5 +39,5 @@ Make sure to set petty as the user shell as well:
 
 
 ```
-$ chsh -s petty
+$ chsh -s /usr/local/bin/petty
 ```
