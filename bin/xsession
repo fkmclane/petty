@@ -3,28 +3,28 @@ if [ -z "$DISPLAY" ]; then
 	export DISPLAY=":0"
 fi
 
-if [ "$1" ]; then
+if [ -n "$1" ]; then
 	XINITRC="$1"
 else
-	XINITRC="/etc/X11/xinit/xinitrc"
-
 	if [ -x "$HOME/.xinitrc" ]; then
 		XINITRC="$HOME/.xinitrc"
+	else
+		XINITRC="/etc/X11/xinit/xinitrc"
 	fi
 fi
 
-if [ "$2" ]; then
+if [ -n "$2" ]; then
 	XSERVERRC="$2"
 else
-	XSERVERRC="/etc/X11/xinit/xserverrc"
-
 	if [ -x "$HOME/.xserverrc" ]; then
 		XSERVERRC="$HOME/.xserverrc"
+	else
+		XSERVERRC="/etc/X11/xinit/xserverrc"
 	fi
 fi
 
 if [ -z "$XAUTHORITY" ]; then
-	if [ "$3" ]; then
+	if [ -n "$3" ]; then
 		export XAUTHORITY="$3"
 	else
 		export XAUTHORITY="$HOME/.Xauthority"
@@ -32,14 +32,14 @@ if [ -z "$XAUTHORITY" ]; then
 fi
 
 if [ -z "$XSERVER" ]; then
-	if [ "$4" ]; then
+	if [ -n "$4" ]; then
 		export XSERVER="$4"
 	else
 		export XSERVER="$HOME/.Xserver"
 	fi
 fi
 
-if [ "$5" ]; then
+if [ -n "$5" ]; then
 	MCOOKIE="$5"
 else
 	MCOOKIE="$(mcookie)"

@@ -20,5 +20,6 @@ else
 fi
 
 export DISPLAY=":$XDG_VTNR"
+export XDG_SESSION_TYPE="x11"
 
 exec xsession "$xsession_exec"
