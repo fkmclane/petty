@@ -3,13 +3,19 @@ if [ -z "$DISPLAY" ]; then
 	export DISPLAY=":0"
 fi
 
+if [ -z "$XDG_VTNR" ]; then
+	export XDG_VTNR="0"
+fi
+
 if [ -n "$1" ]; then
 	XINITRC="$1"
 else
 	if [ -x "$HOME/.xinitrc" ]; then
 		XINITRC="$HOME/.xinitrc"
-	else
+	elif [ -x "/etc/X11/xinit/xinitrc" ]; then
 		XINITRC="/etc/X11/xinit/xinitrc"
+	else
+		XINITRC="$(which xterm)"
 	fi
 fi
 
@@ -18,8 +24,10 @@ if [ -n "$2" ]; then
 else
 	if [ -x "$HOME/.xserverrc" ]; then
 		XSERVERRC="$HOME/.xserverrc"
-	else
+	elif [ -x "/etc/X11/xinit/xserverrc" ]; then
 		XSERVERRC="/etc/X11/xinit/xserverrc"
+	else
+		XSERVERRC="$(which X)"
 	fi
 fi
 
@@ -53,7 +61,7 @@ xauth -f "$XAUTHORITY" -q <<EOF
 add $DISPLAY . $MCOOKIE
 EOF
 
-xinit "$XINITRC" -- "$XSERVERRC" "$DISPLAY"
+xinit "$XINITRC" -- "$XSERVERRC" "$DISPLAY" vt"$XDG_VTNR"
 
 xauth -f "$XAUTHORITY" -q <<EOF
 remove $DISPLAY
