@@ -3,7 +3,7 @@ if [ -z "$XDG_CONFIG_HOME" ]; then
 	XDG_CONFIG_HOME="$HOME/.config"
 fi
 
-xsession="$(basename $0)"
+xsession="$(basename "$0")"
 
 if [ -x "$XDG_CONFIG_HOME/xsessions/$xsession" ]; then
 	xsession_exec="$XDG_CONFIG_HOME/xsessions/$xsession"

@@ -1,8 +1,8 @@
 #!/bin/sh
 if [ -f "/etc/profile" ]; then
-	source /etc/profile
+	. /etc/profile
 elif [ -f "$HOME/.profile" ]; then
-	source "$HOME/.profile"
+	. "$HOME/.profile"
 fi
 
 if [ -z "$XDG_CONFIG_HOME" ]; then
@@ -16,16 +16,19 @@ if [ $# -ne 0 ]; then
 fi
 
 if [ -f "$XDG_CONFIG_HOME/petty/pettyrc" ]; then
-	source "$XDG_CONFIG_HOME/petty/pettyrc"
+	. "$XDG_CONFIG_HOME/petty/pettyrc"
 elif [ -f "/etc/petty/pettyrc" ]; then
-	source "/etc/petty/pettyrc"
+	. "/etc/petty/pettyrc"
 fi
 
 if [ -z "$XDG_SESSION_DESKTOP" ]; then
 	eval session="\$session$XDG_VTNR"
 
 	if [ -n "$session" ]; then
-		if [ -x "$XDG_CONFIG_HOME/sessions/$session" ]; then
+		if [ -x "$session" ]; then
+			session="$(basename "$session")"
+			session_exec="$session"
+		elif [ -x "$XDG_CONFIG_HOME/sessions/$session" ]; then
 			session_exec="$XDG_CONFIG_HOME/sessions/$session"
 		elif [ -x "/etc/sessions/$session" ]; then
 			session_exec="/etc/sessions/$session"
